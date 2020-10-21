@@ -3,6 +3,7 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
+const Constraint = Matter.Constraint;
 
 var backGround,backgroundImg;
 var stick,stickImg;
@@ -29,9 +30,9 @@ function preload()
 function setup() {
 	createCanvas(900, 500);
 
-	/*backGround = createSprite(450,250,900,600);
+	backGround = createSprite(450,250,900,600);
 	backGround.addImage("background",backgroundImg);
-	backGround.scale = 3;*/
+	backGround.scale = 3;
 
 	stick = createSprite(450,40,150,15);
 	stick.addImage("rod",stickImg);
@@ -47,8 +48,11 @@ function setup() {
 	ball5 = new Ball(600,350,60);
 
 	ground = new Ground(width/2, height-20, width,15);
+	ground1 = new Ground(width/2, height-60, width,15);
 
-	//rope1 = new rope(ball1.body,{x:200, y:40});
+	//uncomment the below line to see the error
+	
+	//rope1 = new rope(stick.body,ball1.body);
 
 	Engine.run(engine);
   
@@ -59,6 +63,10 @@ function draw() {
   rectMode(CENTER);
   background(255);
   
+
+  drawSprites();
+
+
 	ball1.display();
 	ball2.display();
 	ball3.display();
@@ -67,8 +75,6 @@ function draw() {
 
 
 	ground.display();
-
-  drawSprites();
 
   text(mouseX + ", "+mouseY,mouseX,mouseY)
  

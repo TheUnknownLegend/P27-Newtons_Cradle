@@ -1,47 +1,24 @@
 class rope{
-    constructor(bodyA, pointB){
+    constructor(body1,body2,offsetX,offsetY){
         var options = {
-            bodyA: bodyA,
-            pointB: pointB,
-            stiffness: 0.04,
-            length: 10
+            body1: body1,
+            body2: body2,
+            offsetX : offsetX,
+            offsetY : offsetY,
+            pointB: {x:this.offsetX, y:this.offsetY}
         }
-        
-        this.pointB = pointB
-        this.sling = Constraint.create(options);
-        World.add(world, this.sling);
-    }
-    attach(body){
-        this.sling.bodyA = body;
-    }
-    
-    fly(){
-        this.sling.bodyA = null;
-    }
 
-    display(){
-        if(this.sling.bodyA){
-            var pointA = this.sling.bodyA.position;
-            var pointB = this.pointB;
-            push();
-            
-            stroke(48,22,8);
-            if(pointA.x < 220) {
-                strokeWeight(7);
-                line(pointA.x - 20, pointA.y, pointB.x -10, pointB.y);
-                line(pointA.x - 20, pointA.y, pointB.x + 30, pointB.y - 3);
-                image(this.sling3,pointA.x -30, pointA.y -10,15,30);
-            }
-            else{
-                strokeWeight(3);
-                line(pointA.x + 25, pointA.y, pointB.x -10, pointB.y);
-                line(pointA.x + 25, pointA.y, pointB.x + 30, pointB.y - 3);
-                image(this.sling3,pointA.x + 25, pointA.y -10,15,30);
-            }
-           
-            
-            pop();
-        }
+        this.rope = Constraint.create(options);
+        World.add(world,options) 
+
     }
-    
+display(){
+        var pointA = this.rope.bodyA.position;
+        var pointB = this.rope.bodyB.position;
+
+        strokeWeight(2);
+        fill("cyan")
+        line(pointA.x,pointA.y,pointB.x+this.offsetX,pointB.y+this.offsetY);
+
+    }
 }
