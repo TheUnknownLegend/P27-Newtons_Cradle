@@ -7,6 +7,9 @@ const Constraint = Matter.Constraint;
 
 var backGround,backgroundImg;
 var stick,stickImg;
+var ground, ground1;
+
+var groundA1 ,groundA2 , groundA3 ,groundA4 , groundA5;
 
 var ball1; 
 var ball2;
@@ -41,18 +44,28 @@ function setup() {
 	engine = Engine.create();
 	world = engine.world;
 
-	ball1 = new Ball(200,350,60);
+	ball1 = new Ball(150,350,60);
 	ball2 = new Ball(300,350,60);
-	ball3 = new Ball(400,350,60);
-	ball4 = new Ball(500,350,60);
-	ball5 = new Ball(600,350,60);
+	ball3 = new Ball(450,350,60);
+	ball4 = new Ball(600,350,60);
+	ball5 = new Ball(750,350,60);
 
 	ground = new Ground(width/2, height-20, width,15);
 	ground1 = new Ground(width/2, height-60, width,15);
 
+	groundA1 = new Ground(150, 40, 1,15);
+	groundA2 = new Ground(300, 40, 1,15);
+	groundA3 = new Ground(450, 40, 1,15);
+	groundA4 = new Ground(600, 40, 1,15);
+	groundA5 = new Ground(750, 40, 1,15);
+
 	//uncomment the below line to see the error
-	
-	//rope1 = new rope(stick.body,ball1.body);
+
+	rope1 = new rope(groundA1.body,ball1.body,60,30);
+	rope2 = new rope(groundA2.body,ball2.body,0,0);
+	rope3 = new rope(groundA3.body,ball3.body,0,0);
+	rope4 = new rope(groundA4.body,ball4.body,0,0);
+	rope5 = new rope(groundA5.body,ball5.body,60,30);
 
 	Engine.run(engine);
   
@@ -73,6 +86,11 @@ function draw() {
 	ball4.display();
 	ball5.display();
 
+	rope1.display();
+	rope2.display();
+	rope3.display();
+	rope4.display();
+	rope5.display();
 
 	ground.display();
 
