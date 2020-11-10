@@ -61,11 +61,11 @@ function setup() {
 
 	//uncomment the below line to see the error
 
-	rope1 = new rope(groundA1.body,ball1.body,50,0);
+	rope1 = new rope(groundA1.body,ball1.body,50,30);
 	rope2 = new rope(groundA2.body,ball2.body,50,0);
 	rope3 = new rope(groundA3.body,ball3.body,50,0);
 	rope4 = new rope(groundA4.body,ball4.body,50,0);
-	rope5 = new rope(groundA5.body,ball5.body,50,0);
+	rope5 = new rope(groundA5.body,ball5.body,60,30);
 
 	Engine.run(engine);
   
@@ -98,5 +98,8 @@ function draw() {
  
 }
 
+function mouseDragged(){
+	Matter.Body.setPosition(ball1.body,{x:mouseX , y: mouseY});
+}
 
 

@@ -4,13 +4,11 @@ class rope{
         this.offsetX = offsetX
         this.offsetY = offsetY
 
-
         var options = {
             bodyA: bodyA,
             bodyB: bodyB,
-            pointC: {x:this.offsetX, y:this.offsetY},
-            stiffness:1.0,
-            length: 150
+            pointB: {x:this.offsetX, y:this.offsetY},
+            length: 100
         }
 
         this.rope = Constraint.create(options);
@@ -21,11 +19,9 @@ display(){
         var pointA = this.rope.bodyA.position;
         var pointB = this.rope.bodyB.position;
 
-        push();
         strokeWeight(5);
-        stroke("black");
+        fill("brown")
         line(pointA.x,pointA.y,pointB.x+this.offsetX,pointB.y+this.offsetY);
-        pop();
 
     }
 }
