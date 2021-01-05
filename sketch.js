@@ -3,70 +3,42 @@ const Engine = Matter.Engine;
 const World = Matter.World;
 const Bodies = Matter.Bodies;
 const Body = Matter.Body;
-const Constraint = Matter.Constraint;
+const Constraint = Matter.Constraint ; 
 
-var backGround,backgroundImg;
-var stick,stickImg;
-var ground, ground1;
+var bobObject1, bobObject2, bobObject3, bobObject4, bobObject5;
+var ground;
+var roofObject ;
 
-var groundA1 ,groundA2 , groundA3 ,groundA4 , groundA5;
-
-var ball1; 
-var ball2;
-var ball3;
-var ball4;
-var ball5;
-
-var rope1;
-var rope2;
-var rope3;
-var rope4;
-var rope5;
-
+var bg;
+var ball;
 
 function preload()
 {
-	backgroundImg = loadImage("download.jpg");
-	stickImg = loadImage("Stick.png");
+	bg = loadImage("bg.jpg");
+
+	ball = loadImage("ball.png");
 }
 
 function setup() {
-	createCanvas(900, 500);
-
-	backGround = createSprite(450,250,900,600);
-	backGround.addImage("background",backgroundImg);
-	backGround.scale = 3;
-
-	stick = createSprite(450,40,150,15);
-	stick.addImage("rod",stickImg);
-	stick.scale = 3;
+	createCanvas(windowWidth, windowHeight-20);
 
 	engine = Engine.create();
 	world = engine.world;
+		
+	bobObject1=new Bob(600,350,50);
+	bobObject2=new Bob(650,350,50);
+	bobObject3=new Bob(700,350,50);
+	bobObject4=new Bob(750,350,50);
+	bobObject5=new Bob(800,350,50);
 
-	ball1 = new Ball(150,350,60);
-	ball2 = new Ball(300,350,60);
-	ball3 = new Ball(450,350,60);
-	ball4 = new Ball(600,350,60);
-	ball5 = new Ball(750,350,60);
-
-	ground = new Ground(width/2, height-20, width,15);
-	ground1 = new Ground(width/2, height-60, width,15);
-
-	groundA1 = new Ground(150, 40, 1,15);
-	groundA2 = new Ground(300, 40, 1,15);
-	groundA3 = new Ground(450, 40, 1,15);
-	groundA4 = new Ground(600, 40, 1,15);
-	groundA5 = new Ground(750, 40, 1,15);
-
-	//uncomment the below line to see the error
-
-	rope1 = new rope(groundA1.body,ball1.body,50,30);
-	rope2 = new rope(groundA2.body,ball2.body,50,0);
-	rope3 = new rope(groundA3.body,ball3.body,50,0);
-	rope4 = new rope(groundA4.body,ball4.body,50,0);
-	rope5 = new rope(groundA5.body,ball5.body,60,30);
-
+	ground = new Roof(600,200,300,20);
+	
+	sling1= new Rope(bobObject1.body,ground.body,-50*2,0);
+	sling2= new Rope(bobObject2.body,ground.body,-25*2,0);
+	sling3= new Rope(bobObject3.body,ground.body,-0*2,0);
+	sling4= new Rope(bobObject4.body,ground.body,25*2,0);
+	sling5= new Rope(bobObject5.body,ground.body,50*2,0);
+		
 	Engine.run(engine);
   
 }
@@ -74,32 +46,33 @@ function setup() {
 
 function draw() {
   rectMode(CENTER);
-  background(255);
+  background(bg);
   
-
   drawSprites();
 
-
-	ball1.display();
-	ball2.display();
-	ball3.display();
-	ball4.display();
-	ball5.display();
-
-	rope1.display();
-	rope2.display();
-	rope3.display();
-	rope4.display();
-	rope5.display();
+	bobObject1.display();
+	bobObject2.display();
+	bobObject3.display();
+	bobObject4.display();
+	bobObject5.display();
 
 	ground.display();
+	
+	sling1.display();
+	sling2.display();
+	sling3.display();
+	sling4.display();
+	sling5.display();
 
-  text(mouseX + ", "+mouseY,mouseX,mouseY)
- 
+  textFont("algerian")	
+  textSize(22)
+  text("Press up arrow key to move the bob",width/2 - 150,height);
 }
 
-function mouseDragged(){
-	Matter.Body.setPosition(ball1.body,{x:mouseX , y: mouseY});
-}
+function keyPressed() { 
+	if (keyCode === UP_ARROW) 
+	{ Matter.Body.applyForce(bobObject1.body,bobObject1.body.position,{x:-100,y:-100}); } 
+} 
+
 
 
